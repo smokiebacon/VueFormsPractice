@@ -60,12 +60,15 @@
       <hr />
       <div class="row">
         <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-          <app-switch v-model="dataSwitch"></app-switch>
+          <appSwitch v-model="dataSwitch"></appSwitch>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
           <button class="btn btn-primary">Submit!</button>
+        </div>
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+          <changeStatus v-model="changeStatus"></changeStatus>
         </div>
       </div>
     </form>
@@ -101,6 +104,10 @@
             <p>Gender: {{gender}}</p>
             <p>Priority: {{ selectedPriority }}</p>
             <p>Switched: {{ dataSwitch }}</p>
+            <p>Status: {{ changeStatus }}</p>
+            <p>Counter: {{ counter }}</p>
+            <button @click="increaseCounter">+</button>
+            <button @click="decreaseCounter">_</button>
           </div>
         </div>
       </div>
@@ -110,6 +117,7 @@
 
 <script>
 import Switch from "./Switch";
+import ChangeStatus from "./ChangeStatus";
 
 export default {
   data() {
@@ -121,14 +129,25 @@ export default {
       },
       message: "Enter some text!",
       sendMail: [],
+      counter: 0,
       gender: "Male",
+      changeStatus: "Criticalll",
       selectedPriority: "Medium",
       priorities: ["High", "Medium", " Low"],
       dataSwitch: true
     };
   },
+  methods: {
+    increaseCounter() {
+      this.counter++;
+    },
+    decreaseCounter() {
+      this.counter--;
+    }
+  },
   components: {
-    appSwitch: Switch
+    appSwitch: Switch,
+    changeStatus: ChangeStatus
   }
 };
 </script>
